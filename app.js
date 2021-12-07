@@ -45,7 +45,7 @@ app.post('/restaurants', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// Read
+// Read detail
 app.get('/restaurant/:id', (req, res) => {
   const showId = req.params.id
   return Restaurant.findById(showId)
@@ -54,15 +54,32 @@ app.get('/restaurant/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-  })
-  res.render('index', { restaurant: restaurants, keyword: keyword})
+// Edit
+app.get('/restaurant/:id/edit', (req, res) => {
+  const editId = req.params.id
+  return Restaurant.findById(editId)
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
 })
+
+app.post('/restaurant/:id/edit', (req,res) => {
+  const id = req.params.id
+  const editRestaurant = req.body
+  Restaurant.findByIdAndUpdate(id, editRestaurant)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+
+// Search
+// app.get('/search', (req, res) => {
+//   const keyword = req.query.keyword
+//   const restaurants = Restaurant.results.filter(restaurant => {
+//     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+//   })
+//   res.render('index', { restaurant: restaurants, keyword: keyword})
+// })
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
