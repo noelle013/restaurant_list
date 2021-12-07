@@ -45,12 +45,16 @@ app.post('/restaurants', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-
-app.get('/restaurants/:id', (req, res) => {
-  const target = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.id)
-  res.render('show', { restaurant: target })
+// Read
+app.get('/restaurant/:id', (req, res) => {
+  const showId = req.params.id
+  return Restaurant.findById(showId)
+    .lean()
+    .then((restaurant) => res.render('show', { restaurant }))
+    .catch(error => console.log(error))
 })
+
+
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword

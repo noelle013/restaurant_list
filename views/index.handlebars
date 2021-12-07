@@ -22,7 +22,7 @@
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurant}}
-        <a href="/restaurants/{{this.id}}" class="text-secondary">
+        <a href="/restaurant/{{this._id}}" class="text-secondary">
           <div class="card mb-3">
             <img class="card-img-top" src="{{this.image}}"
               alt="{{this.name}}">
@@ -39,8 +39,8 @@
               </span>
             </div>
             <div class="card-footer d-flex justify-content-end px-3">
-              <button type="button" class="btn btn-outline-secondary btn-sm ml-2">Detail</button>
-              <button type="button" class="btn btn-outline-secondary btn-sm ml-2">Edit</button>
+              <a href="/restaurant/{{this._id}}"><button type="button" class="btn btn-outline-secondary btn-sm ml-2">Edit</button></a>
+              <a href="/restaurant/{{this._id}}"><button type="button" class="btn btn-outline-secondary btn-sm ml-2">Detail</button></a>
               <button type="button" class="btn btn-outline-danger btn-sm ml-2">Delete</button>
             </div>
           </div>
