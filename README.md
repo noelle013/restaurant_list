@@ -4,7 +4,7 @@
 ## 功能
 - 在首頁看到所有餐廳環境照片、類型、評價
 - 可透過關鍵字搜尋想找的餐廳的店名及類別
-- 點擊目標餐廳後，可以看到更多相關資訊及介紹
+- 可以編輯、刪除、新增及瀏覽特定餐廳
 
 ##  安裝步驟
 1. 
@@ -19,9 +19,10 @@ cd restaurant_list
 ```
 npm install
 ```
-4. node app.js
-5. input "http://localhost:3000/" in browser
-6. if you want to exit, pressing ctrl + c
+4. npm run start
+5. npm run dev
+6. input "http://localhost:3000/" in browser
+7. if you want to exit, pressing ctrl + c
 
 ## 開發工具
 - Express 4.17.1
