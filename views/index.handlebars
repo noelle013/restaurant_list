@@ -6,7 +6,7 @@
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" value="{{keyword}}" aria-label="Restaurant Name..."
-            value="" aria-describedby="search-button">
+             aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button">Go!</button>
           </div>
@@ -41,7 +41,9 @@
             <div class="card-footer d-flex justify-content-end px-3">
               <a href="/restaurant/{{this._id}}/edit"><button type="button" class="btn btn-outline-secondary btn-sm ml-2">Edit</button></a>
               <a href="/restaurant/{{this._id}}"><button type="button" class="btn btn-outline-secondary btn-sm ml-2">Detail</button></a>
-              <button type="button" class="btn btn-outline-danger btn-sm ml-2">Delete</button>
+              <form action="/restaurant/{{ this._id }}/delete" method="POST" style="display: inline;">
+                <button type="submit" class="btn btn-outline-danger btn-sm ml-2">Delete</button>
+              </form>
             </div>
           </div>
         </a>

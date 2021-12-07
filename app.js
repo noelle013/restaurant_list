@@ -71,15 +71,31 @@ app.post('/restaurant/:id/edit', (req,res) => {
     .catch(error => console.log(error))
 })
 
+// Delete
+app.post('/restaurant/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 // Search
-// app.get('/search', (req, res) => {
-//   const keyword = req.query.keyword
-//   const restaurants = Restaurant.results.filter(restaurant => {
-//     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-//   })
-//   res.render('index', { restaurant: restaurants, keyword: keyword})
-// })
+app.get('/search', (req, res) => {
+  if (!req.query.keyword) {
+    res.redirect('/')
+  }
+  const keyword = req.query.keyword.trim().toLowerCase()
+  Restaurant.find({})
+    .lean()
+    .then(restaurants => {
+      const filterRestaurants = restaurants.filter(data => 
+        data.name.toLowerCase().includes(keyword) || data.category.includes(keyword)
+      )
+      res.render('index', { restaurant: filterRestaurants, keyword })
+    })
+    .catch(error => console.log(error))
+})   
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
