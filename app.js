@@ -1,10 +1,11 @@
 const express = require('express')
-const app = express()
 const port = 3000
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
+const methodOverride = require('method-override')
 
+const app = express()
 mongoose.connect('mongodb://localhost/restaurant-list')
 const db = mongoose.connection
 
@@ -24,6 +25,8 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 app.use(express.urlencoded({ extended: true }))
+
+app.use(methodOverride('_method'))
 
 // get 全部餐廳資料
 app.get('/', (req, res) => {
@@ -63,7 +66,7 @@ app.get('/restaurant/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurant/:id/edit', (req,res) => {
+app.put('/restaurant/:id', (req,res) => {
   const id = req.params.id
   const editRestaurant = req.body
   Restaurant.findByIdAndUpdate(id, editRestaurant)
@@ -72,7 +75,7 @@ app.post('/restaurant/:id/edit', (req,res) => {
 })
 
 // Delete
-app.post('/restaurant/:id/delete', (req, res) => {
+app.delete('/restaurant/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
