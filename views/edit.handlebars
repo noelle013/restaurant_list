@@ -24,7 +24,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="phone">電話</label>
-        <input type="text" class="form-control" id="phone" name="phone" value="{{ restaurant.phone}}">
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="請按照此格式填寫：02-12345678" minlength="10" maxlength="11" value="{{ restaurant.phone}}">
       </div>
       <div class="form-group col-md-6">
         <label for="location">地址</label>
@@ -40,7 +40,7 @@
       </div>
       <div class="form-group col-md-12">
         <label for="image">餐廳圖片</label>
-        <input type="text" class="form-control" id="image" name="image" value="{{ restaurant.image}}">
+        <input type="url" class="form-control" id="image" name="image" value="{{ restaurant.image}}">
       </div>
       <div class="form-group col-md-12">
         <label for="google_map">地圖連結</label>
